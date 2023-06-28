@@ -1,0 +1,14 @@
+.banda1 {
+    /* Otros estilos adicionales si los necesitas */
+  }
+  
+  .example-form-field {
+    width: 200px;
+  }
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    max-width: 600px;
+
+}

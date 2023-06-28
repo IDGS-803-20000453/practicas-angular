@@ -1,0 +1,36 @@
+<p>cinepolis works!</p>
+
+<div class="contenedor">
+    <h1>Cinepolis:</h1>
+
+    <mat-label>Nombre</mat-label>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Nombre" [(ngModel)]="nombre">
+    </mat-form-field>
+    <mat-label>Cantidad de compradores</mat-label>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Cantidad de compradores" [(ngModel)]="cantidadCompradores">
+    </mat-form-field><br>
+    <mat-label>¿Tiene tarjeta Cineco?</mat-label>
+
+    <mat-radio-group name="tarjetaCineco" [(ngModel)]="tarjetaCineco">
+        <mat-radio-button value="Si">Si</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+    </mat-radio-group>
+<br>
+
+     <br>
+     <mat-label>Cantidad de boletas</mat-label>
+
+     <mat-form-field>
+        <input matInput type="number" placeholder="Cantidad de boletas" [(ngModel)]="cantidadBoletas">
+    </mat-form-field>
+    
+    <button mat-raised-button color="primary" (click)="calcular()">Calcular</button>
+    <br>
+    <mat-label><h2>Notas de la compra:</h2></mat-label>
+    <p>Nombre: {{nombre}}</p>
+    <p>Cantidad de compradores: {{cantidadCompradores}}</p>
+    <p>Cantidad de boletas: {{cantidadBoletas}}</p>
+    <p>Total a pagar: {{valorPago}}</p>
+</div>

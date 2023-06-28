@@ -1,0 +1,84 @@
+<p>resistencia works!</p>
+
+
+
+<div class="contenedor">
+    <h1>Calculadora de resistencias:</h1>
+
+    <img src="https://www.digikey.com/-/media/Images/Marketing/Resources/Calculator/resistor-color-chart.png?la=es-US&ts=4db603f5-4e9b-4759-84b7-21a04d18b1a8" alt="">
+
+    <mat-label>Banda 1</mat-label>
+    <mat-form-field>
+        <mat-select [(ngModel)]="banda1">
+            <mat-option value="negro">Negro</mat-option>
+            <mat-option value="marrón">Marrón</mat-option>
+            <mat-option value="rojo">Rojo</mat-option>
+            <mat-option value="naranja">Naranja</mat-option>
+            <mat-option value="amarillo">Amarillo</mat-option>
+            <mat-option value="verde">Verde</mat-option>
+            <mat-option value="azul">Azul</mat-option>
+            <mat-option value="violeta">Violeta</mat-option>
+            <mat-option value="gris">Gris</mat-option>
+            <mat-option value="blanco">Blanco</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-label>Banda 2</mat-label>
+    <mat-form-field>
+        <mat-select [(ngModel)]="banda2">
+            <mat-option value="negro">Negro</mat-option>
+            <mat-option value="marrón">Marrón</mat-option>
+            <mat-option value="rojo">Rojo</mat-option>
+            <mat-option value="naranja">Naranja</mat-option>
+            <mat-option value="amarillo">Amarillo</mat-option>
+            <mat-option value="verde">Verde</mat-option>
+            <mat-option value="azul">Azul</mat-option>
+            <mat-option value="violeta">Violeta</mat-option>
+            <mat-option value="gris">Gris</mat-option>
+            <mat-option value="blanco">Blanco</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-label>Banda 3</mat-label>
+    <mat-form-field>
+        <mat-select [(ngModel)]="banda3">
+            <mat-option value="negro">Negro</mat-option>
+            <mat-option value="marrón">Marrón</mat-option>
+            <mat-option value="rojo">Rojo</mat-option>
+            <mat-option value="naranja">Naranja</mat-option>
+            <mat-option value="amarillo">Amarillo</mat-option>
+            <mat-option value="verde">Verde</mat-option>
+            <mat-option value="azul">Azul</mat-option>
+            <mat-option value="violeta">Violeta</mat-option>
+            <mat-option value="gris">Gris</mat-option>
+            <mat-option value="blanco">Blanco</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-label>Tolerancia</mat-label>
+    <mat-form-field>
+        <mat-select [(ngModel)]="banda4">
+            <mat-option value="dorado">Dorado</mat-option>
+            <mat-option value="plateado">Plateado</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="calcular()">Calcular</button>
+    <br>
+    <div class="bandas" style="display: flex;">
+        <div class="banda1" [style.background-color]="banda1Color">banda 1 </div>
+        <div class="banda2" [style.background-color]="banda2Color"> -banda 2 </div>
+        <div class="banda3" [style.background-color]="banda3Color"> -banda 3 </div>
+        <div class="banda4" [style.background-color]="banda4Color"> -banda 4 </div>
+      </div>
+      
+    <br>
+    <mat-label><h2>Valor de la resistencia:</h2></mat-label>
+    <p>{{ resistencia }}</p>
+
+    <mat-label><h2>Valor Maximo de la resistencia:</h2></mat-label>
+    <p>{{ valor_maximo }}</p>
+
+    <mat-label><h2>Valor Minimo de la resistencia:</h2></mat-label>
+    <p>{{ valor_minimo }}</p>
+</div>
