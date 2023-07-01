@@ -10,9 +10,12 @@ import { CinepolisComponent } from './src/app/utl/cinepolis/cinepolis.component'
 import { CinepolisModule } from './src/app/utl/cinepo/cinepolis.module';
 import { ResistenciaComponent } from './src/app/utl/resistencia/resistencia.component';
 import { ResistenciaModule } from './src/app/utl/resis/resistencia.module';
+import { MenuComponent } from 'src/app/utl/menu/menu.component';
+import { AppRoutingModule } from './app.routing.module';
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +24,8 @@ import { ResistenciaModule } from './src/app/utl/resis/resistencia.module';
     DistanciaModule,
     CinepolisModule,
     ResistenciaModule,
+    AppRoutingModule
+    
 
   ],
   providers: [],
