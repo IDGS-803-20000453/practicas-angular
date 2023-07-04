@@ -9,6 +9,7 @@ import { DistanciaModule } from './src/app/utl/distanc/distancia.module';
 import { CinepolisComponent } from './src/app/utl/cinepolis/cinepolis.component';
 import { CinepolisModule } from './src/app/utl/cinepo/cinepolis.module';
 import { ResistenciaComponent } from './src/app/utl/resistencia/resistencia.component';
+import { PizzasModule } from './pizz/pizzas.module';
 import { ResistenciaModule } from './src/app/utl/resis/resistencia.module';
 import { MenuComponent } from 'src/app/utl/menu/menu.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './app.routing.module';
     DistanciaModule,
     CinepolisModule,
     ResistenciaModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PizzasModule
     
 
   ],

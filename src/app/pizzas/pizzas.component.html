@@ -1,0 +1,130 @@
+<h2>Agregar Pizza</h2>
+<form [formGroup]="pizzaForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombre" class="form-control" required>
+    <div *ngIf="pizzaForm.get('nombre')?.touched && pizzaForm.get('nombre')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Dirección:</label>
+    <input type="text" formControlName="direccion" class="form-control" required>
+    <div *ngIf="pizzaForm.get('direccion')?.touched && pizzaForm.get('direccion')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Teléfono:</label>
+    <input type="text" formControlName="telefono" class="form-control" required>
+    <div *ngIf="pizzaForm.get('telefono')?.touched && pizzaForm.get('telefono')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Fecha:</label>
+    <input type="date" formControlName="fecha" class="form-control" required>
+    <div *ngIf="pizzaForm.get('fecha')?.touched && pizzaForm.get('fecha')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Tamaño:</label>
+    <mat-radio-group formControlName="tamanio" class="form-control" required>
+      <mat-radio-button value="Pequeña">Pequeña</mat-radio-button>
+      <mat-radio-button value="Mediana">Mediana</mat-radio-button>
+      <mat-radio-button value="Grande">Grande</mat-radio-button>
+    </mat-radio-group>
+    <div *ngIf="pizzaForm.get('tamanio')?.touched && pizzaForm.get('tamanio')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Ingredientes:</label>
+    <div formArrayName="ingredientes">
+      <mat-checkbox *ngFor="let ingrediente of ingredientes; let i = index" [formControlName]="i" (change)="onCheckboxChange($event)">
+        {{ ingrediente.nombre }}
+      </mat-checkbox>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Número de Pizzas:</label>
+    <input type="number" formControlName="numeroPizzas" class="form-control" required>
+    <div *ngIf="pizzaForm.get('numeroPizzas')?.touched && pizzaForm.get('numeroPizzas')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar Pizza</button>
+</form>
+
+<button type="button" class="btn btn-primary" (click)="pedidoTerminado = true">Terminar Pedido</button>
+<button type="button" class="btn btn-primary" (click)="nuevoPedido()">Nuevo Pedido</button>
+
+
+
+
+<h2>Pizzas Agregadas</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Fecha</th>
+      <th>Tamaño</th>
+      <th>Ingredientes</th>
+      <th>Número de Pizzas</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pedido of pedidos">
+      <td>{{ pedido.nombre }}</td>
+      <td>{{ pedido.direccion }}</td>
+      <td>{{ pedido.telefono }}</td>
+      <td>{{ pedido.fecha }}</td>
+      <td>{{ pedido.tamanio }}</td>
+      <td>{{ pedido.ingredientes.join(', ') }}</td>
+      <td>{{ pedido.numeroPizzas }}</td>
+      <td>{{ pedido.subtotal }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Total</h2>
+<p>Total Pizza: {{ totalPizza }}</p>
+<ng-container *ngIf="pedidoTerminado">
+
+<h2>Pedido</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Fecha</th>
+      <th>Detalles de Pizza</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ pedidos[0]?.nombre }}</td>
+      <td>{{ pedidos[0]?.direccion }}</td>
+      <td>{{ pedidos[0]?.telefono }}</td>
+      <td>{{ pedidos[0]?.fecha }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let pedido of pedidos">{{ pedido.numeroPizzas }} pizza(s) {{ pedido.tamanio }} de {{ pedido.ingredientes.join(', ') }}</li>
+        </ul>
+      </td>
+      <td>{{ totalPizza }}</td>
+    </tr>
+  </tbody>
+</table>
+</ng-container>
+
+
+
+
+

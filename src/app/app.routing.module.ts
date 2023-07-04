@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { CinepolisComponent } from "./src/app/utl/cinepolis/cinepolis.component";
 import { DistanciaComponent } from "./src/app/utl/distancia/distancia.component";
 import { ResistenciaComponent } from "./src/app/utl/resistencia/resistencia.component";
+import { PizzasComponent } from "./pizzas/pizzas.component";
 
 const routes: Routes = [
 
@@ -10,6 +11,7 @@ const routes: Routes = [
     {path: 'Cinepolis', component: CinepolisComponent},
     {path: 'Formulario', component: DistanciaComponent},
     {path: 'Resistencia', component: ResistenciaComponent},
+    {path: 'Pizzas', component: PizzasComponent},
 
     //{path: '**', component: PagenotfoundComponent}
     
