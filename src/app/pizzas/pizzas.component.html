@@ -58,10 +58,7 @@
 </form>
 
 <button type="button" class="btn btn-primary" (click)="pedidoTerminado = true">Terminar Pedido</button>
-<button type="button" class="btn btn-primary" (click)="nuevoPedido()">Nuevo Pedido</button>
-
-
-
+<button type="button" class="btn btn-primary" (click)="nuevoPedido();">Nuevo Pedido</button>
 
 <h2>Pizzas Agregadas</h2>
 <table class="table">
@@ -90,41 +87,71 @@
     </tr>
   </tbody>
 </table>
+<h1>Detalles del Pedido</h1>
+<div class="ticket">
+  <h2>Nombre:</h2>
+  <p>{{ nombre }}</p>
+  <h2>Dirección:</h2>
+  <p>{{ direccion }}</p>
+  <h2>Teléfono:</h2>
+  <p>{{ telefono }}</p>
+  <h2>Fecha:</h2>
+  <p>{{ fecha }}</p>
+  <h2>Orden:</h2>
+  <p>{{ orden }}</p>
+</div>
 
 <h2>Total</h2>
 <p>Total Pizza: {{ totalPizza }}</p>
+
 <ng-container *ngIf="pedidoTerminado">
-
-<h2>Pedido</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Dirección</th>
-      <th>Teléfono</th>
-      <th>Fecha</th>
-      <th>Detalles de Pizza</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ pedidos[0]?.nombre }}</td>
-      <td>{{ pedidos[0]?.direccion }}</td>
-      <td>{{ pedidos[0]?.telefono }}</td>
-      <td>{{ pedidos[0]?.fecha }}</td>
-      <td>
-        <ul>
-          <li *ngFor="let pedido of pedidos">{{ pedido.numeroPizzas }} pizza(s) {{ pedido.tamanio }} de {{ pedido.ingredientes.join(', ') }}</li>
-        </ul>
-      </td>
-      <td>{{ totalPizza }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>Pedido</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Fecha</th>
+        <th>Detalles de Pizza</th>
+        <th>Subtotal</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li *ngFor="let nombre of nombreHistorialPizza">{{ nombre }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let direccion of direccionHistorialPizza">{{ direccion }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let telefono of telefonoHistorialPizza">{{ telefono }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let fecha of fechaHistorialPizza">{{ fecha }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let detalle of detallesHistorialPizza">{{ detalle }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor="let subtotal of subtotalPizzaHistorial">{{ subtotal }}</li>
+          </ul>
+        </td>
+        <td>{{ historialTotalPizza }}</td>
+      </tr>
+    </tbody>
+  </table>
 </ng-container>
-
-
-
-
-
