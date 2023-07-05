@@ -1,64 +1,90 @@
 <h2>Agregar Pizza</h2>
 <form [formGroup]="pizzaForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label>Nombre:</label>
-    <input type="text" formControlName="nombre" class="form-control" required>
-    <div *ngIf="pizzaForm.get('nombre')?.touched && pizzaForm.get('nombre')?.errors?.['required']" class="alert alert-danger">
+  <label>Nombre:</label>
+  <input type="text" formControlName="nombre" class="form-control" required>
+  <div *ngIf="pizzaForm.get('nombre')?.touched">
+    <div *ngIf="pizzaForm.get('nombre')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+    <div *ngIf="pizzaForm.get('nombre')?.errors?.['pattern']" class="alert alert-danger">
+      Error: El nombre debe contener solo letras
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label>Dirección:</label>
+  <input type="text" formControlName="direccion" class="form-control" required>
+  <div *ngIf="pizzaForm.get('direccion')?.touched">
+    <div *ngIf="pizzaForm.get('direccion')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+    <div *ngIf="pizzaForm.get('direccion')?.errors?.['minlength']" class="alert alert-danger">
+      Error: La dirección debe tener al menos 8 caracteres
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label>Teléfono:</label>
+  <input type="text" formControlName="telefono" class="form-control" required>
+  <div *ngIf="pizzaForm.get('telefono')?.touched">
+    <div *ngIf="pizzaForm.get('telefono')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+    <div *ngIf="pizzaForm.get('telefono')?.errors?.['pattern']" class="alert alert-danger">
+      Error: El teléfono debe contener solo números y tener 10 dígitos
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label>Fecha:</label>
+  <input type="date" formControlName="fecha" class="form-control" required>
+  <div *ngIf="pizzaForm.get('fecha')?.touched">
+    <div *ngIf="pizzaForm.get('fecha')?.errors?.['required']" class="alert alert-danger">
+      Error: Campo requerido
+    </div>
+    <div *ngIf="pizzaForm.get('fecha')?.errors?.['minDate']" class="alert alert-danger">
+      Error: La fecha debe ser 30 días mayor o igual a la fecha actual
+    </div>
+  </div>
+</div>
+  <div class="form-group">
+  <label>Tamaño:</label>
+  <mat-radio-group formControlName="tamanio" class="form-control" required>
+    <mat-radio-button value="Chica">Chica</mat-radio-button>
+    <mat-radio-button value="Mediana">Mediana</mat-radio-button>
+    <mat-radio-button value="Grande">Grande</mat-radio-button>
+  </mat-radio-group>
+  <div *ngIf="pizzaForm.get('tamanio')?.touched">
+    <div *ngIf="pizzaForm.get('tamanio')?.errors?.['required']" class="alert alert-danger">
       Error: Campo requerido
     </div>
   </div>
-  <div class="form-group">
-    <label>Dirección:</label>
-    <input type="text" formControlName="direccion" class="form-control" required>
-    <div *ngIf="pizzaForm.get('direccion')?.touched && pizzaForm.get('direccion')?.errors?.['required']" class="alert alert-danger">
+</div>
+<div class="form-group">
+  <label>Ingredientes:</label>
+  <div formArrayName="ingredientes">
+    <mat-checkbox *ngFor="let ingrediente of ingredientes; let i = index" [formControlName]="i" (change)="onCheckboxChange($event)">
+      {{ ingrediente.nombre }}
+    </mat-checkbox>
+  </div>
+</div>
+<div class="form-group">
+  <label>Número de Pizzas:</label>
+  <input type="number" formControlName="numeroPizzas" class="form-control" required>
+  <div *ngIf="pizzaForm.get('numeroPizzas')?.touched">
+    <div *ngIf="pizzaForm.get('numeroPizzas')?.errors?.['required']" class="alert alert-danger">
       Error: Campo requerido
     </div>
-  </div>
-  <div class="form-group">
-    <label>Teléfono:</label>
-    <input type="text" formControlName="telefono" class="form-control" required>
-    <div *ngIf="pizzaForm.get('telefono')?.touched && pizzaForm.get('telefono')?.errors?.['required']" class="alert alert-danger">
-      Error: Campo requerido
+    <div *ngIf="pizzaForm.get('numeroPizzas')?.errors?.['min']" class="alert alert-danger">
+      Error: El número de pizzas debe ser mayor a 0
     </div>
   </div>
-  <div class="form-group">
-    <label>Fecha:</label>
-    <input type="date" formControlName="fecha" class="form-control" required>
-    <div *ngIf="pizzaForm.get('fecha')?.touched && pizzaForm.get('fecha')?.errors?.['required']" class="alert alert-danger">
-      Error: Campo requerido
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Tamaño:</label>
-    <mat-radio-group formControlName="tamanio" class="form-control" required>
-      <mat-radio-button value="Pequeña">Pequeña</mat-radio-button>
-      <mat-radio-button value="Mediana">Mediana</mat-radio-button>
-      <mat-radio-button value="Grande">Grande</mat-radio-button>
-    </mat-radio-group>
-    <div *ngIf="pizzaForm.get('tamanio')?.touched && pizzaForm.get('tamanio')?.errors?.['required']" class="alert alert-danger">
-      Error: Campo requerido
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Ingredientes:</label>
-    <div formArrayName="ingredientes">
-      <mat-checkbox *ngFor="let ingrediente of ingredientes; let i = index" [formControlName]="i" (change)="onCheckboxChange($event)">
-        {{ ingrediente.nombre }}
-      </mat-checkbox>
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Número de Pizzas:</label>
-    <input type="number" formControlName="numeroPizzas" class="form-control" required>
-    <div *ngIf="pizzaForm.get('numeroPizzas')?.touched && pizzaForm.get('numeroPizzas')?.errors?.['required']" class="alert alert-danger">
-      Error: Campo requerido
-    </div>
-  </div>
+</div>
+
   <button type="submit" class="btn btn-primary">Agregar Pizza</button>
 </form>
 
-<button type="button" class="btn btn-primary" (click)="pedidoTerminado = true">Terminar Pedido</button>
-<button type="button" class="btn btn-primary" (click)="nuevoPedido();">Nuevo Pedido</button>
 
 <h2>Pizzas Agregadas</h2>
 <table class="table">
@@ -89,20 +115,33 @@
 </table>
 <h1>Detalles del Pedido</h1>
 <div class="ticket">
-  <h2>Nombre:</h2>
-  <p>{{ nombre }}</p>
-  <h2>Dirección:</h2>
-  <p>{{ direccion }}</p>
-  <h2>Teléfono:</h2>
-  <p>{{ telefono }}</p>
-  <h2>Fecha:</h2>
-  <p>{{ fecha }}</p>
-  <h2>Orden:</h2>
-  <p>{{ orden }}</p>
+  <h2>Nombre: <p>{{ nombre }}</p></h2>
+  
+  <h2>Dirección: <p>{{ direccion }}</p></h2>
+  
+  <h2>Teléfono: <p>{{ telefono }}</p></h2>
+  
+  <h2>Fecha: <p>{{ fecha }}</p></h2>
+  
+  <h2>Orden: <p>{{ orden }}</p></h2>
+  
+  <h2>Total: <strong> {{ totalPizza }}</strong></h2>
 </div>
 
-<h2>Total</h2>
-<p>Total Pizza: {{ totalPizza }}</p>
+<div class="floating-buttons">
+  <button type="button" class="btn btn-primary" (click)="pedidoTerminado = true">
+    <mat-icon>check_circle</mat-icon> Terminar Pedido
+  </button>
+  <button type="button" class="btn btn-primary" (click)="nuevoPedido();">
+    <mat-icon>add_circle</mat-icon> Nuevo Pedido
+  </button>
+</div>
+
+
+
+
+
+
 
 <ng-container *ngIf="pedidoTerminado">
   <h2>Pedido</h2>
