@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
 import swal from 'sweetalert2';
 import {
   FormGroup,
@@ -34,7 +36,10 @@ export class PizzasComponent {
   numeroPizzas: number = 0;
   ingredientesPizza: string = '';
   tamanioPizza: string = '';
+
+  fechaActual: Date = new Date();
   fecha: string = '';
+
   telefono: string = '';
   direccion: string = '';
   nombre: string = '';
@@ -69,6 +74,11 @@ export class PizzasComponent {
 
   constructor(private fb: FormBuilder) {
     this.pizzaForm = this.initForm();
+
+    // Establecer la fecha predeterminada en el control del formulario
+    this.pizzaForm
+      .get('fecha')
+      ?.patchValue(this.fechaActual.toISOString().split('T')[0]);
   }
 
   onSubmit(): void {
@@ -80,7 +90,7 @@ export class PizzasComponent {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Sí, agregar',
-        cancelButtonText: 'Cancelar'
+        cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
           this.obtenerValores();
@@ -88,9 +98,9 @@ export class PizzasComponent {
           this.pizzaForm.get('numeroPizzas')?.reset();
           this.pizzaForm.get('ingredientes')?.reset();
           this.pizzaForm.get('tamanio')?.reset();
-  
+
           // Aquí puedes ejecutar el código adicional que deseas realizar después de la confirmación
-  
+
           Swal.fire(
             '¡Pizza agregada!',
             'La pizza ha sido agregada al pedido.',
@@ -98,7 +108,6 @@ export class PizzasComponent {
           );
         }
       });
-  
     } else {
       // Marcar todos los campos como tocados para mostrar los mensajes de error
       this.markAllFieldsAsTouched();
@@ -138,19 +147,17 @@ export class PizzasComponent {
     this.limpiarFormulario(); // Limpiar los campos del formulario
   }
 
-
   //metodo que limpiara el array de pedidos y el array de historial de pedidos
   restaurarPedidos(): void {
     this.pedidos = [];
     this.historialPedidos = [];
     this.historialTotalPizza = 0;
-    this.nombreHistorialPizza=[];
-    this.direccionHistorialPizza=[];
-    this.telefonoHistorialPizza=[];
-    this.fechaHistorialPizza=[];
-    this.subtotalPizzaHistorial=[];
-    this.detallesHistorialPizza=[];
-    
+    this.nombreHistorialPizza = [];
+    this.direccionHistorialPizza = [];
+    this.telefonoHistorialPizza = [];
+    this.fechaHistorialPizza = [];
+    this.subtotalPizzaHistorial = [];
+    this.detallesHistorialPizza = [];
   }
   obtenerValores(): void {
     const nom = this.pizzaForm.get('nombre')?.value;
@@ -181,9 +188,9 @@ export class PizzasComponent {
     const ingredientesSeleccionados = this.ingredientes
       .filter((ingrediente: any) => ingrediente.selected)
       .map((ingrediente: any) => ingrediente.nombre);
-      if (ingredientesSeleccionados.length === 0) {
-        ingredientesSeleccionados.push('Queso');
-      }
+    if (ingredientesSeleccionados.length === 0) {
+      ingredientesSeleccionados.push('Queso');
+    }
     const pedido = {
       nombre: nom,
       direccion: dir,
@@ -242,13 +249,12 @@ export class PizzasComponent {
 
     // obtener el numero de pizzas
     this.numeroPizzas = numPi;
-    
 
     //obtener los ingredientes seleccionados y concatenarlos
     this.ingredientesPizza = ingredientesSeleccionados.join(', ');
     //if de que si ingredientes seleccionados tiene algo
     if (this.ingredientesPizza != '') {
-      this.ingredientesPizza = "Queso";
+      this.ingredientesPizza = 'Queso';
     }
     //obtener el tamaño de la pizza
     this.tamanioPizza = tam;
@@ -282,6 +288,10 @@ export class PizzasComponent {
     this.subtotalPizza = 0;
     this.totalPizza = 0;
     this.orden = '';
+    // Volver a asignar el valor predeterminado al campo de fecha
+    this.pizzaForm
+      .get('fecha')
+      ?.patchValue(this.fechaActual.toISOString().split('T')[0]);
   }
 
   minDateValidator() {
