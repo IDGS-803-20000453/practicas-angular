@@ -138,6 +138,20 @@ export class PizzasComponent {
     this.limpiarFormulario(); // Limpiar los campos del formulario
   }
 
+
+  //metodo que limpiara el array de pedidos y el array de historial de pedidos
+  restaurarPedidos(): void {
+    this.pedidos = [];
+    this.historialPedidos = [];
+    this.historialTotalPizza = 0;
+    this.nombreHistorialPizza=[];
+    this.direccionHistorialPizza=[];
+    this.telefonoHistorialPizza=[];
+    this.fechaHistorialPizza=[];
+    this.subtotalPizzaHistorial=[];
+    this.detallesHistorialPizza=[];
+    
+  }
   obtenerValores(): void {
     const nom = this.pizzaForm.get('nombre')?.value;
     const dir = this.pizzaForm.get('direccion')?.value;

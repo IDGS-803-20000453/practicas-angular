@@ -51,9 +51,9 @@
   <div class="form-group">
   <label>Tamaño:</label>
   <mat-radio-group formControlName="tamanio" class="form-control" required>
-    <mat-radio-button value="Chica">Chica</mat-radio-button>
-    <mat-radio-button value="Mediana">Mediana</mat-radio-button>
-    <mat-radio-button value="Grande">Grande</mat-radio-button>
+    <mat-radio-button value="Chica">Chica. 40$</mat-radio-button>
+    <mat-radio-button value="Mediana">Mediana. 80$</mat-radio-button>
+    <mat-radio-button value="Grande">Grande. 120$</mat-radio-button>
   </mat-radio-group>
   <div *ngIf="pizzaForm.get('tamanio')?.touched">
     <div *ngIf="pizzaForm.get('tamanio')?.errors?.['required']" class="alert alert-danger">
@@ -86,8 +86,11 @@
     </div>
   </div>
 </div>
+<div class="botones">
 
-  <button type="submit" class="btn btn-primary">Agregar Pizza</button>
+
+  <button type="submit" class="btn btn-primary"><mat-icon> local_pizza</mat-icon>Agregar Pizza</button>
+</div>
 </form>
 
 
@@ -142,14 +145,13 @@
   </button>
 </div>
 
-
-
-
-
-
-
 <ng-container *ngIf="pedidoTerminado">
   <h2>Consulta de ventas</h2>
+  <div class="botones">
+  <button type = "button" class="btn btn-primary" (click)="restaurarPedidos();">
+    <mat-icon>restore</mat-icon> Restaurar Pedidos
+  </button>
+</div>
   <table class="table">
     <thead>
       <tr>
