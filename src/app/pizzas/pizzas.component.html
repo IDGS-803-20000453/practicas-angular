@@ -25,7 +25,7 @@
   </div>
 </div>
 <div class="form-group">
-  <label>Teléfono:</label>
+  <label>Teléfono(10 digitos):</label>
   <input type="text" formControlName="telefono" class="form-control" required>
   <div *ngIf="pizzaForm.get('telefono')?.touched">
     <div *ngIf="pizzaForm.get('telefono')?.errors?.['required']" class="alert alert-danger">
@@ -64,11 +64,16 @@
 <div class="form-group">
   <label>Ingredientes:</label>
   <div formArrayName="ingredientes">
+    <div>
+      <span class="ingredient-label">Pizza solo de queso o:</span>
+    </div>
     <mat-checkbox *ngFor="let ingrediente of ingredientes; let i = index" [formControlName]="i" (change)="onCheckboxChange($event)">
-      {{ ingrediente.nombre }}
+      {{ ingrediente.nombre }} <span class="price-label">+10$</span>
     </mat-checkbox>
   </div>
 </div>
+
+
 <div class="form-group">
   <label>Número de Pizzas:</label>
   <input type="number" formControlName="numeroPizzas" class="form-control" required>
@@ -129,7 +134,7 @@
 </div>
 
 <div class="floating-buttons">
-  <button type="button" class="btn btn-primary" (click)="pedidoTerminado = true">
+  <button type="button" class="btn btn-primary" (click)="pedidoTerminado = true" style="display: none;">
     <mat-icon>check_circle</mat-icon> Terminar Pedido
   </button>
   <button type="button" class="btn btn-primary" (click)="nuevoPedido();">
@@ -144,7 +149,7 @@
 
 
 <ng-container *ngIf="pedidoTerminado">
-  <h2>Pedido</h2>
+  <h2>Consulta de ventas</h2>
   <table class="table">
     <thead>
       <tr>

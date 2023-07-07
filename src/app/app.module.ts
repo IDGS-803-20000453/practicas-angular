@@ -13,10 +13,12 @@ import { PizzasModule } from './pizz/pizzas.module';
 import { ResistenciaModule } from './src/app/utl/resis/resistencia.module';
 import { MenuComponent } from 'src/app/utl/menu/menu.component';
 import { AppRoutingModule } from './app.routing.module';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

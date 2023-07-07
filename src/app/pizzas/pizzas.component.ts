@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import swal from 'sweetalert2';
 import {
   FormGroup,
   Validators,
@@ -7,6 +8,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Injectable()
 @Component({
@@ -27,7 +29,7 @@ export class PizzasComponent {
     { nombre: 'piña', selected: false },
     { nombre: 'champiñones', selected: false },
   ];
-  pedidoTerminado: boolean = false;
+  pedidoTerminado: boolean = true;
   mostrarPizzasAgregadas: boolean = true;
   numeroPizzas: number = 0;
   ingredientesPizza: string = '';
@@ -71,8 +73,32 @@ export class PizzasComponent {
 
   onSubmit(): void {
     if (this.pizzaForm.valid) {
-      this.obtenerValores();
-      this.resetIngredientesSeleccionados();
+      // Mostrar una alerta de confirmación
+      Swal.fire({
+        title: '¿Agregar esta pizza al pedido?',
+        text: 'Esta acción no se puede deshacer',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, agregar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.obtenerValores();
+          this.resetIngredientesSeleccionados();
+          this.pizzaForm.get('numeroPizzas')?.reset();
+          this.pizzaForm.get('ingredientes')?.reset();
+          this.pizzaForm.get('tamanio')?.reset();
+  
+          // Aquí puedes ejecutar el código adicional que deseas realizar después de la confirmación
+  
+          Swal.fire(
+            '¡Pizza agregada!',
+            'La pizza ha sido agregada al pedido.',
+            'success'
+          );
+        }
+      });
+  
     } else {
       // Marcar todos los campos como tocados para mostrar los mensajes de error
       this.markAllFieldsAsTouched();
@@ -119,6 +145,10 @@ export class PizzasComponent {
     const fech = this.pizzaForm.get('fecha')?.value;
     const tam = this.pizzaForm.get('tamanio')?.value;
     const ingr = this.pizzaForm.get('ingredientes')?.value ?? [];
+    //if de que si ingr no tiene nada o es null, que se le asigne un array con un solo valor el cual sera de Queso
+    if (ingr.length == 0) {
+      ingr.push('Queso');
+    }
     const numPi = this.pizzaForm.get('numeroPizzas')?.value;
 
     let numIngredientes = ingr.filter((ingrediente: any) => ingrediente).length;
@@ -137,7 +167,9 @@ export class PizzasComponent {
     const ingredientesSeleccionados = this.ingredientes
       .filter((ingrediente: any) => ingrediente.selected)
       .map((ingrediente: any) => ingrediente.nombre);
-
+      if (ingredientesSeleccionados.length === 0) {
+        ingredientesSeleccionados.push('Queso');
+      }
     const pedido = {
       nombre: nom,
       direccion: dir,
@@ -196,8 +228,14 @@ export class PizzasComponent {
 
     // obtener el numero de pizzas
     this.numeroPizzas = numPi;
+    
+
     //obtener los ingredientes seleccionados y concatenarlos
     this.ingredientesPizza = ingredientesSeleccionados.join(', ');
+    //if de que si ingredientes seleccionados tiene algo
+    if (this.ingredientesPizza != '') {
+      this.ingredientesPizza = "Queso";
+    }
     //obtener el tamaño de la pizza
     this.tamanioPizza = tam;
     //obtener la fecha del pedido
