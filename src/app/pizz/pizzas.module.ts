@@ -11,6 +11,8 @@ import { PizzasComponent } from '../pizzas/pizzas.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [PizzasComponent],
@@ -24,7 +26,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         FormsModule,
         MatFormFieldModule,
         ReactiveFormsModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatSelectModule
   ],
   exports: [PizzasComponent]
 })
